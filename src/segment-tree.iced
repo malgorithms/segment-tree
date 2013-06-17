@@ -180,10 +180,11 @@ class SegmentTree
     else
       if not tree.items.length
         return {
-          distance: Infinity
-          point:    null
-          segment:  null
-          object:   null
+          distance:             Infinity
+          point:                null
+          segment:              null
+          object:               null
+          position_on_segment:  null
         }
       else
         closest_item      = null
@@ -194,10 +195,11 @@ class SegmentTree
             closest_item      = item
             closest_item_info = info
         return {
-          distance:  closest_item_info.dist
-          point:     closest_item_info.point   
-          segment:   closest_item.segment      
-          object:    @by_id[closest_item.id].o 
+          distance:             closest_item_info.dist
+          point:                closest_item_info.point
+          position_on_segment:  closest_item_info.position_on_segment
+          segment:              closest_item.segment      
+          object:               @by_id[closest_item.id].o 
         }
 
   _maybe_split: (tree, depth) ->
