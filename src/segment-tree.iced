@@ -104,7 +104,7 @@ class SegmentTree
       tree.items.push {id, segment}
 
   _find_nearest_vertex: (tuple, tree) ->
-    # returns {vertex, distance, object} // possibly null, Infinity
+    # returns {vertex, distance, object, node_num} // vertex_num = 0 or 1 from the segment
     if tree.axis?
       left_info  = tree.left.bounds.distance_from_vec  tuple
       right_info = tree.right.bounds.distance_from_vec tuple 
@@ -129,9 +129,10 @@ class SegmentTree
     else
       if not tree.items.length
         return {
-          distance: Infinity 
-          vertex:   null
-          object:   null 
+          distance:   Infinity 
+          vertex:     null
+          object:     null
+          vertex_num: null
         }
       else
         closest_item      = null
@@ -143,15 +144,18 @@ class SegmentTree
             closest_item      = item
             closest_vertex    = item.segment[0]
             closest_item_dsq  = dsq
+            vertex_num        = 0
           dsq = Utils.dist_sq tuple, item.segment[1]
           if dsq < closest_item_dsq
             closest_item      = item
             closest_vertex    = item.segment[1]
             closest_item_dsq  = dsq
+            vertex_num        = 1
         return {
-          vertex:   closest_vertex
-          distance: Math.sqrt closest_item_dsq
-          object:   @by_id[closest_item.id].o 
+          vertex:     closest_vertex
+          distance:   Math.sqrt closest_item_dsq
+          object:     @by_id[closest_item.id].o 
+          vertex_num: vertex_num
         }
 
   _find_nearest_segment: (tuple, tree) ->

@@ -161,7 +161,7 @@ module.exports=require('8U2X6G');
     };
 
     SegmentTree.prototype._find_nearest_vertex = function(tuple, tree) {
-      var closest_item, closest_item_dsq, closest_vertex, dsq, i, item, left_best, left_info, right_best, right_info, _i, _len, _ref;
+      var closest_item, closest_item_dsq, closest_vertex, dsq, i, item, left_best, left_info, right_best, right_info, vertex_num, _i, _len, _ref;
       if (tree.axis != null) {
         left_info = tree.left.bounds.distance_from_vec(tuple);
         right_info = tree.right.bounds.distance_from_vec(tuple);
@@ -188,7 +188,8 @@ module.exports=require('8U2X6G');
           return {
             distance: Infinity,
             vertex: null,
-            object: null
+            object: null,
+            vertex_num: null
           };
         } else {
           closest_item = null;
@@ -202,18 +203,21 @@ module.exports=require('8U2X6G');
               closest_item = item;
               closest_vertex = item.segment[0];
               closest_item_dsq = dsq;
+              vertex_num = 0;
             }
             dsq = Utils.dist_sq(tuple, item.segment[1]);
             if (dsq < closest_item_dsq) {
               closest_item = item;
               closest_vertex = item.segment[1];
               closest_item_dsq = dsq;
+              vertex_num = 1;
             }
           }
           return {
             vertex: closest_vertex,
             distance: Math.sqrt(closest_item_dsq),
-            object: this.by_id[closest_item.id].o
+            object: this.by_id[closest_item.id].o,
+            vertex_num: vertex_num
           };
         }
       }
