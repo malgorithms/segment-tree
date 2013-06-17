@@ -1,7 +1,7 @@
 {
- "name": "segment-tree",
+ "name": "segmentree",
  "description": "A module/lib for keeping track of segments",
- "version": "0.0.1",
+ "version": "0.0.2",
  "directories": {
   "lib": "./lib"
  },

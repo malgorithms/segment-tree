@@ -22,8 +22,8 @@ Example:
 ###
 
 DEFAULTS = 
-  SPLIT_GAIN:   0.4
-  MIN_TO_SPLIT: 6
+  SPLIT_GAIN:   0.2
+  MIN_TO_SPLIT: 16
 
 class SegmentTree
 
