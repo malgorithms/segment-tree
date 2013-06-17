@@ -1,0 +1,31 @@
+{
+ "name": "segment-tree",
+ "description": "A module/lib for keeping track of segments",
+ "version": "0.0.1",
+ "directories": {
+  "lib": "./lib"
+ },
+ "main": "index.js",
+ "author": "Chris Coyne <ccoyne77@gmail.com>",
+ "dependencies": {
+ },
+ "devDependencies": {
+  "iced-coffee-script"  : "*",
+  "browserify"          : "*",
+  "stitch"              : "*",
+  "icsify"              : "*",
+  "uglify-js"           : "*",
+  "through"             : "*",
+  "iced-error"          : "*"
+ },
+ "repository": {
+  "type": "git",
+  "url": "http://github.com/malgorithms/segment-tree"
+ },
+ "licenses": [
+  {
+   "type": "MIT",
+   "url": "http://github.com/malgorithms/segment-tree/raw/master/LICENSE"
+  }
+ ]
+}
