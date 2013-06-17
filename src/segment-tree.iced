@@ -230,18 +230,21 @@ class SegmentTree
     @_add i.id, i.segment, tree, depth+1 for i in to_move
 
   _get_split_candidate: (tree, axis) ->
+    # for now, let's split right down the middle
+    # and improve this later
     res =
-      divider:    null
+      divider:    (tree.bounds.ll[axis] + tree.bounds.ur[axis]) / 2
       split_gain: null
       axis:       axis
+
+    ###
     left_points  = (i.segment[0][axis] for i in tree.items)
     right_points = (i.segment[1][axis] for i in tree.items)
-    # for now, let's just get the median of all these points
-    # come back to this later to pick a smarter divider
     points = []
     points.push p for p in left_points
     points.push p for p in right_points
     res.divider     = Utils.median points
+    ###
     res.split_gain = @_calc_split_gain tree.items, axis, res.divider
     return res
 

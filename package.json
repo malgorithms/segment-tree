@@ -1,7 +1,7 @@
 {
  "name": "stree",
  "description": "A module/lib for keeping track of segments",
- "version": "0.0.4",
+ "version": "0.0.5",
  "directories": {
   "lib": "./lib"
  },
