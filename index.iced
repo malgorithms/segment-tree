@@ -1,1 +1,1 @@
-exports = module.exports = require('./segment-tree').SegmentTree
+exports = module.exports = require('./lib/segment-tree').SegmentTree
