@@ -53,6 +53,11 @@ class SegmentTree
   nearest_vertex: (tuple) ->
     return @_find_nearest_vertex tuple, @tree
 
+  vertices_inside_ball: (tuple, radius) ->
+    res = []
+    @_find_vertices_inside_ball tuple, @tree, radius, res
+    return res
+
   summarize: ->
     return {
       num_trees: @num_trees
@@ -102,6 +107,27 @@ class SegmentTree
         @_add id, segment, tree.right, depth+1
     else
       tree.items.push {id, segment}
+
+  _find_vertices_inside_ball: (tuple, tree, radius, res) ->
+    if tree.items?.length
+      for item, i in tree.items        
+        dsq = Utils.dist_sq tuple, item.segment[0]
+        for vertex_num in [0,1]
+          if dsq < radius * radius
+            res.push {
+              distance:   Math.sqrt dsq
+              vertex:     item.segment[vertex_num]
+              vertex_num: vertex_num
+              object:     @by_id[item.id].o 
+            }
+    else 
+      left_info   = tree.left.bounds.distance_from_vec  tuple
+      right_info  = tree.right.bounds.distance_from_vec tuple
+      if left_info.distance <= radius
+        @_find_vertices_inside_ball tuple, tree.left, radius, res
+      if right_info.distance <= radius
+        @_find_vertices_inside_ball tuple, tree.right, radius, res
+
 
   _find_nearest_vertex: (tuple, tree) ->
     # returns {vertex, distance, object, node_num} // vertex_num = 0 or 1 from the segment

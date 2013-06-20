@@ -45,3 +45,14 @@ exports.test = test = ->
     v = [Math.random()*50, Math.random()*50]
     res = st.nearest_segment v
   console.log "#{LOOKUPS} segment lookups in #{Date.now() - d} == #{(Date.now() - d) / LOOKUPS}ms/lookup"
+
+
+  d = Date.now()
+  for i in [0...LOOKUPS]
+    v = [Math.random()*50, Math.random()*50]
+    radius = Math.random() * 3
+    res    = st.vertices_inside_ball v, radius
+    #if i is 0
+    #  console.log v, radius, res
+
+  console.log "#{LOOKUPS} radial lookups in #{Date.now() - d} == #{(Date.now() - d) / LOOKUPS}ms/lookup"
