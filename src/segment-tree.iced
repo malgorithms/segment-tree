@@ -281,16 +281,19 @@ class SegmentTree
     return res
 
   _calc_split_gain: (items, axis, divider) ->
+    #
+    # a negative split gain means it's a bad idea to divide
+    # a positive split gain (which can go up to 0.5) indicates 
+    # there expects to be a reduction in segments
     left_count  = 0
     right_count = 0
     for item in items
       s = item.segment
       if @_is_on_left s, axis, divider  then left_count++
       if @_is_on_right s, axis, divider then right_count++
-    duplicates = left_count + right_count - items.length
-    lsc = left_count  - duplicates
-    rsc = right_count - duplicates
-    return Math.min (lsc / items.length), (rsc / items.length)
+    l_frac = left_count / items.length
+    r_frac = right_count / items.length
+    return 1 - (l_frac * l_frac + r_frac * r_frac)
 
 
 

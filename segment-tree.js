@@ -400,7 +400,7 @@ module.exports=require('8U2X6G');
     };
 
     SegmentTree.prototype._calc_split_gain = function(items, axis, divider) {
-      var duplicates, item, left_count, lsc, right_count, rsc, s, _i, _len;
+      var item, l_frac, left_count, r_frac, right_count, s, _i, _len;
       left_count = 0;
       right_count = 0;
       for (_i = 0, _len = items.length; _i < _len; _i++) {
@@ -413,10 +413,9 @@ module.exports=require('8U2X6G');
           right_count++;
         }
       }
-      duplicates = left_count + right_count - items.length;
-      lsc = left_count - duplicates;
-      rsc = right_count - duplicates;
-      return Math.min(lsc / items.length, rsc / items.length);
+      l_frac = left_count / items.length;
+      r_frac = right_count / items.length;
+      return 1 - (l_frac * l_frac + r_frac * r_frac);
     };
 
     return SegmentTree;
